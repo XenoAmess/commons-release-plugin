@@ -302,18 +302,16 @@
         <version>1.10</version>
       </plugin>
       <plugin>
-        <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-javadoc-plugin</artifactId>
-        <version>${commons.javadoc.version}</version>
         <configuration>
-          <!-- keep only errors and warnings -->
-          <show>private</show>
+          <source>${maven.compiler.source}</source>
           <quiet>true</quiet>
-          <encoding>${commons.encoding}</encoding>
+          <encoding>utf-8</encoding>
+          <docEncoding>utf-8</docEncoding>
           <notimestamp>true</notimestamp>
           <links>
-            <link>${commons.javadoc.java.link}</link>
-            <link>${commons.javadoc.javaee.link}</link>
+            <link>https://docs.oracle.com/javase/8/docs/api/</link>
+            <link>http://docs.oracle.com/javaee/6/api/</link>
           </links>
           <archive>
             <manifest>
@@ -322,6 +320,16 @@
             </manifest>
           </archive>
         </configuration>
+        <executions>
+          <execution>
+            <id>create-javadoc-jar</id>
+            <goals>
+              <goal>javadoc</goal>
+              <goal>jar</goal>
+            </goals>
+            <phase>package</phase>
+          </execution>
+        </executions>
       </plugin>
       <plugin>
         <artifactId>maven-checkstyle-plugin</artifactId>
